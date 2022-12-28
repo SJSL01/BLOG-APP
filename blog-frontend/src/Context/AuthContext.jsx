@@ -23,7 +23,7 @@ export const AuthContextProvider = ({ children }) => {
 
         try {
             const headers = { "Authorization": `Bearer ${sessionStorage.getItem("token")}` }
-            const res = await axios.post("https://backend-blog-sjsl.onrender.com/isLoggedIn", null, { headers })
+            const res = await axios.post("https://blog-frontend-sjsl08.onrender.com/isLoggedIn", null, { headers })
             setUser(res.data)
             console.log(res.data);
             if (location.pathname === "/" || location.pathname === "/signup") {
@@ -54,7 +54,7 @@ export const AuthContextProvider = ({ children }) => {
         try {
 
             console.log(userData);
-            const res = await axios.post("https://backend-blog-sjsl.onrender.com/user/login", userData)
+            const res = await axios.post("https://blog-frontend-sjsl08.onrender.com/user/login", userData)
             console.log(res.data);
             setUser(res.data.user)
             sessionStorage.setItem("token", res.data.token)
@@ -69,7 +69,7 @@ export const AuthContextProvider = ({ children }) => {
     const signup = async (userData) => {
         console.log(userData);
         try {
-            const res = await axios.post("https://backend-blog-sjsl.onrender.com/user/signup", userData)
+            const res = await axios.post("https://blog-frontend-sjsl08.onrender.com/user/signup", userData)
             // toast.success(res.data)
             console.log(res.data);
             navigate("/")
