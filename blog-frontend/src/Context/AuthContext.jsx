@@ -12,7 +12,7 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
 
 
-    // const { toast } = useContext(ToastContext)
+    const { toast } = useContext(ToastContext)
 
     useEffect(() => {
         isLoggedIn()
@@ -23,9 +23,9 @@ export const AuthContextProvider = ({ children }) => {
 
         try {
             const headers = { "Authorization": `Bearer ${sessionStorage.getItem("token")}` }
-            const res = await axios.post("https://blog-frontend-sjsl08.onrender.com/isLoggedIn", null, { headers })
-            setUser(res.data)
-            console.log(res.data);
+            const res = await axios.post("https://blog-frontend-sjsl08.onrender.com/user/isLoggedIn", null, { headers })
+            setUser("user")
+            // console.log(res);
             if (location.pathname === "/" || location.pathname === "/signup") {
                 navigate("/home", { replace: true });
             } else {
@@ -35,9 +35,8 @@ export const AuthContextProvider = ({ children }) => {
 
         } catch (error) {
             navigate("/")
-            //console.log(error);
-            // toast.error("Please Login First")
-            alert("Please Login First")
+            toast.error("Please Login First")
+            // alert("Please Login First")
         }
     }
 
@@ -53,30 +52,28 @@ export const AuthContextProvider = ({ children }) => {
     const login = async (userData) => {
         try {
 
-            console.log(userData);
+            //console.log(userData);
             const res = await axios.post("https://blog-frontend-sjsl08.onrender.com/user/login", userData)
-            console.log(res.data);
+            //console.log(res.data);
             setUser(res.data.user)
             sessionStorage.setItem("token", res.data.token)
             navigate("/home", { replace: true })
         } catch (error) {
-            // toast.error(error)
-            alert(error)
-            // console.log(error.message);
+            toast.error(error.response.data)
         }
     }
 
     const signup = async (userData) => {
-        console.log(userData);
+        //console.log(userData);
         try {
             const res = await axios.post("https://blog-frontend-sjsl08.onrender.com/user/signup", userData)
             // toast.success(res.data)
-            console.log(res.data);
+            //console.log(res.data);
             navigate("/")
+            toast.success("User Registered Successfully")
         } catch (error) {
-            // toast.error(error)
-            alert(error)
-            // console.log(error.message);
+            toast.error(error.response.data)
+            // //console.log(error.message);
         }
     }
 

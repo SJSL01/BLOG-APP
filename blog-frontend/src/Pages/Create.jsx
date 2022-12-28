@@ -7,7 +7,10 @@ import AuthContext from '../Context/AuthContext'
 import Navbar from '../Components/Navbar'
 import { useNavigate } from 'react-router-dom'
 import "../index.css"
+import ToastContext from '../Context/ToastContext'
 export default function Create() {
+
+    const { toast } = useContext(ToastContext)
 
 
     const navigate = useNavigate()
@@ -16,21 +19,26 @@ export default function Create() {
         image: "",
         title: "",
         description: "",
-        date_time: ""
+        date_time: new Date().toLocaleString()
         // user: user?._id
     })
 
     const create = async () => {
-        try {
-            // console.log(user);
-            // setBlog({ ...blog, user: user })
 
+        if (blog.title.length === 0 || !blog.description.length === 0) {
+            return toast.error("Title and Description cannot be empty")
+        }
+        // //console.log(blog.title.length);
+
+        try {
+            //console.log(blog);
             const res = await axios.post("https://blog-frontend-sjsl08.onrender.com/blog/create", blog)
-            console.log(res.data);
+
+            toast.success(res.data)
 
             navigate("/home", { replace: true })
         } catch (error) {
-            console.log(error.message);
+            //console.log(error.message);
         }
     }
     return (
@@ -43,7 +51,9 @@ export default function Create() {
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     <div>
                         <Filebase64 onDone={(file) => { setBlog({ ...blog, image: file.base64 }) }} />
-                        <img style={{ width: "200px" }} src={blog.image} alt="" />
+                    </div>
+                    <div>
+                        {blog.image && <img style={{ width: "200px" }} src={blog.image} alt="" />}
                     </div>
                     <div>
                         <input type="text"

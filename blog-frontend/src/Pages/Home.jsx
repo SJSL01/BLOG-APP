@@ -7,8 +7,21 @@ import "../index.css"
 import Navbar from '../Components/Navbar'
 import AuthContext from '../Context/AuthContext'
 import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
+
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/", { replace: true })
+        }
+        if(user){
+            navigate("/home")
+        }
+    },[])
 
     const [loader, setloader] = useState(true)
 
@@ -22,11 +35,11 @@ export default function Home() {
     const getBlogs = async () => {
         try {
             const res = await axios.get("https://blog-frontend-sjsl08.onrender.com/blog/getBlogs")
-            console.log(res.data);
+            //console.log(res.data);
             setBlog(res.data)
             setloader(false)
         } catch (error) {
-            console.log(error);
+            //console.log(error);
         }
     }
 
@@ -40,6 +53,7 @@ export default function Home() {
                         <div className='blog'>
                             <div className='title'>{data.title}</div>
                             <div className='description'>{data.description}</div>
+                            <div className='timeDate'>{data.date_time}</div>
                             <div style={{ width: "300px" }} className='image'>
                                 <img style={{ width: "100%" }} src={data.image} alt="" /></div>
                         </div>

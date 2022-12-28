@@ -32,7 +32,8 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(cyan, orangered);
+  animation: bg 10s infinite;
+  /* background: linear-gradient(cyan, orangered); */
 }
 
 h1 {
@@ -72,8 +73,22 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: linear-gradient(rgb(84, 255, 255), orangered);
+  animation: bg 10s infinite;
 }
+
+
+@keyframes bg {
+  0% {
+    background: linear-gradient(rgb(84, 255, 147), rgb(255, 127, 185));
+
+  }
+
+  100% {
+    background: linear-gradient(rgb(133, 243, 215), rgb(255, 118, 253));
+
+  }
+}
+
 
 
 .register form {
@@ -105,19 +120,28 @@ h1 {
 
 .postContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-around;
 }
 
 .title {
 
   font-weight: bold;
+  font-size: 18px;
   color: rgb(0, 92, 92);
 }
 
 .description {
   font-weight: bold;
+}
+
+nav {
+  box-shadow: 10px 0px 10px black;
+}
+
+a {
+  font-size: 16px;
 }
 
 .create {
@@ -138,6 +162,10 @@ textarea {
   font-size: 16px;
 }
 
+img {
+  aspect-ratio: 1/1;
+}
+
 .create button {
   /* width: 100%; */
   margin: 0 auto;
@@ -149,12 +177,13 @@ textarea {
 
 .blog {
   border: 3px solid black;
+  box-shadow: 5px 5px 10px black;
   margin-top: 20px;
 }
 
 
 .loading {
-  
+
   animation: loading 1s infinite;
 }
 
@@ -170,4 +199,8 @@ textarea {
     color: blueviolet;
     scale: 1.0;
   }
+}
+
+input {
+  width: 100%
 }

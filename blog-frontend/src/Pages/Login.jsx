@@ -33,21 +33,21 @@ export default function Login() {
   const handleInput = (e) => {
     const { name, value } = e.target
     setUserData({ ...userData, [name]: value })
-    console.log(userData);
+    //console.log(userData);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const emailReg = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
-    
+
     if (!userData.email.match(emailReg)) {
       return toast.error("Enter a valid email")
     }
-    if (userData.password.length<8) {
-      toast.error("Password must be 8 or more characters, atleast one number, one special character and one letter ")
+    const passwordReg = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
+    if (!userData.password.match(passwordReg)) {
+      return toast.error("Password must be 8 or more characters, atleast one number, one special character and one letter ")
     }
 
-    // console.log(userData);
     login(userData)
   }
   return (
@@ -71,8 +71,8 @@ export default function Login() {
           <button type='submit' onClick={(e) => { handleSubmit(e) }}>Login</button>
         </div>
 
+        <div style={{ fontSize: "16px", fontWeight: "bold" }}>Don't have a account? <Link to={"/signup"}>SignUp</Link></div>
       </form>
-      <div>Don't have a account <Link to={"/signup"}>SignUp</Link></div>
     </div>
   )
 }
