@@ -39,11 +39,11 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     const emailReg = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
-    const passwordReg = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
+    
     if (!userData.email.match(emailReg)) {
       return toast.error("Enter a valid email")
     }
-    if (userData.password.match(passwordReg)) {
+    if (userData.password.length<8) {
       toast.error("Password must be 8 or more characters, atleast one number, one special character and one letter ")
     }
 
