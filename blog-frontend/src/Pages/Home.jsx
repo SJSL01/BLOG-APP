@@ -21,7 +21,7 @@ export default function Home() {
 
     const getBlogs = async () => {
         try {
-            const res = await axios.get("https://backend-blog-sjsl.onrender.com/blog/getBlogs")
+            const res = await axios.get("https://blog-frontend-sjsl08.onrender.com/blog/getBlogs")
             console.log(res.data);
             setBlog(res.data)
             setloader(false)
