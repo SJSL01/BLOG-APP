@@ -25,7 +25,7 @@ export default function Create() {
             // console.log(user);
             // setBlog({ ...blog, user: user })
 
-            const res = await axios.post("https://backend-blog-sjsl.onrender.com/blog/create", blog)
+            const res = await axios.post("https://blog-frontend-sjsl08.onrender.com/blog/create", blog)
             console.log(res.data);
 
             navigate("/home", { replace: true })
