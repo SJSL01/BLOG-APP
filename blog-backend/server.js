@@ -17,7 +17,7 @@ app.use("/user", require("./Routes/User"))
 app.use("/blog", require("./Routes/Blogs"))
 
 
-app.listen(process.env.port, async () => {
+app.listen(process.env.PORT, async () => {
     await connectDB()
     console.log(`Server up at port ${process.env.PORT}`);
 })
